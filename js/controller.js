@@ -53,3 +53,20 @@ appDI.controller("depInyFirstController", ["$scope", function(m){
 		m.nuevoComentario = {};
 	}
 }]);
+
+/* Ajax in AngularJS */
+
+var ajaxApp = angular.module("ajaxApp", []);
+
+ajaxApp.controller("ajaxController", ["$scope", "$http", function(m, h){
+	m.posts = [];
+	h.get("http://jsonplaceholder.typicode.com/posts")
+		.success(function(data){
+			console.log(data);
+			m.posts = data;
+		})
+		.error(function(err){
+			console.log(err);
+		});
+
+}]);
