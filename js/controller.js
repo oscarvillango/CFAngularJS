@@ -1,3 +1,5 @@
+/* First App AngularJS */
+
 var app = angular.module("MyFirstApp", []);
 
 app.controller("firstController", function($scope){
@@ -5,6 +7,7 @@ app.controller("firstController", function($scope){
 });
 
 
+/* ng-Model */
 var app = angular.module("NgModelApp", []);
 
 app.controller("ngmFirstController", function($scope){
@@ -26,3 +29,27 @@ app.controller("ngmFirstController", function($scope){
 		$scope.nuevoComentario = {};
 	}
 });
+
+/* Dependency Inyection */
+
+var appDI = angular.module("DIApp", []);
+
+appDI.controller("depInyFirstController", ["$scope", function(m){
+	m.nombre = "Oscar";
+	m.nuevoComentario = {};
+	m.comentarios = [
+		{
+			comentario : "Primer comentario",
+			usuario : "User 1"
+		},
+		{
+			comentario : "Segundo comentario",
+			usuario : "User 2"
+		}
+	];
+
+	m.agregarComentario = function(){
+		m.comentarios.push(m.nuevoComentario);
+		m.nuevoComentario = {};
+	}
+}]);

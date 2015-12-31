@@ -1,0 +1,22 @@
+<!doctype html>
+	<html ng-app="DIApp">
+		<head>
+			<meta charset="utf-8" />
+			<title>Ejemplo con Angular - Dependency Inyection</title>
+			
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+			<script type="text/javascript" src="js/controller.js"></script>
+			
+		</head>
+		<body ng-controller="depInyFirstController">
+			<input type="text" ng-model="nuevoComentario.comentario" /><br/>
+			<input type="text" ng-model="nuevoComentario.usuario" /><br/>
+			<input type="button" ng-click="agregarComentario()" value="+ Agregar Comentario +"></input>
+			<h3>Comentarios</h3>
+			<ul>
+				<li ng-repeat="comentario in comentarios">
+					{{comentario.comentario}} - <strong>{{comentario.usuario}}</strong>
+				</li>
+			</ul>
+		</body>
+	</html>
