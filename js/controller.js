@@ -103,3 +103,39 @@ ajaxPostApp.controller("ajaxPostController", ["$scope", "$http", function(m, h){
 		});
 	}
 }]);
+
+/* To do list example in AngularJS */
+
+var toDoApp = angular.module("toDoApp", ["LocalStorageModule"]);
+
+toDoApp.controller("toDoController", ["$scope", "localStorageService", function(m, l){
+	
+	if(l.get("toDoList")){
+		m.toDo = l.get("toDoList");		
+	}else{
+		m.toDo = [];
+	}
+
+	m.newActv = {};
+
+	/*
+		{
+			descripcion: "Terminar el curso",
+			fecha: "01-01-16 6:00pm"
+		}
+	*/
+
+	m.$watchCollection("toDo", function(newValue, oldValue){
+		l.set("toDoList", m.toDo);
+	});
+
+	m.addActividad = function(){
+		m.toDo.push(m.newActv);
+		m.newActv = {};
+	}
+
+	m.clearAct = function(){
+		m.toDo = [];
+	}
+
+}]);
