@@ -139,3 +139,25 @@ toDoApp.controller("toDoController", ["$scope", "localStorageService", function(
 	}
 
 }]);
+
+/* Filters example in AngularJS */
+
+var filtersApp = angular.module("filtersApp", []);
+
+filtersApp.filter("removeHTML", function(){
+	return function(texto){
+		return String(texto).replace(/<[^>]+>/gm, "");
+	}
+});
+
+filtersApp.controller("filtersController", ["$scope", function(m){
+	
+	m.textHTML = "<p>Hola Mundo!</p>";
+
+	m.jsonEx = {};
+	m.jsonEx.title = "Titulo";
+	m.jsonEx.body = "Cuerpo del mensaje";
+
+	m.price = 3000;
+
+}]);
