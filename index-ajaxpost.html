@@ -1,0 +1,22 @@
+<!doctype html>
+	<html ng-app="ajaxPostApp">
+		<head>
+			<meta charset="utf-8" />
+			<title>Ejemplo con Angular - Ajax</title>
+			
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+			<script type="text/javascript" src="js/controller.js"></script>
+			
+		</head>
+		<body ng-controller="ajaxPostController">
+			Titulo: <input type="text" ng-model="newPost.title" /><br/>
+			Content: <textarea ng-model="newPost.body"></textarea> <br/>
+			<input type="button" ng-click="addPost()" value="+ Add Post +" />
+			<ul>
+				<li ng-repeat="post in posts">
+					<h3>{{post.title}}</h3>
+					<p>{{post.body}}</p>
+				</li>
+			</ul>
+		</body>
+	</html>

@@ -70,3 +70,36 @@ ajaxApp.controller("ajaxController", ["$scope", "$http", function(m, h){
 		});
 
 }]);
+
+/* Ajax - Post in AngularJS */
+
+var ajaxPostApp = angular.module("ajaxPostApp", []);
+
+ajaxPostApp.controller("ajaxPostController", ["$scope", "$http", function(m, h){
+	m.posts = [];
+	m.newPost = {};
+	h.get("http://jsonplaceholder.typicode.com/posts")
+		.success(function(data){
+			console.log(data);
+			m.posts = data;
+		})
+		.error(function(err){
+			console.log(err);
+		});
+
+	m.addPost = function(){
+		h.post("http://jsonplaceholder.typicode.com/posts", {
+			title: m.newPost.title,
+			body: m.newPost.body,
+			userId: 1
+		})
+		.success(function(data, status, headers, config){
+			m.posts.push(m.newPost);
+			console.log(data);
+			m.newPost = {};
+		})
+		.error(function(err){
+			console.log(err);
+		});
+	}
+}]);
