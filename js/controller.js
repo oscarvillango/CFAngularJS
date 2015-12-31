@@ -161,3 +161,29 @@ filtersApp.controller("filtersController", ["$scope", function(m){
 	m.price = 3000;
 
 }]);
+
+/* Filters example in AngularJS */
+
+var wapdiApp = angular.module("wapdiApp", []);
+
+wapdiApp.controller("wapdiController", ["$scope", function(m){
+	
+	m.nombre = "Oscar";
+
+	/*setTimeout(function(){
+		//m.$digest();
+		m.$apply(function(){
+			m.nombre = "Prueba";
+		});
+		console.log(m.nombre);
+	}, 2000);*/
+
+	document.querySelector("#change-name").addEventListener("click", function(){
+		/*m.nombre = "Prueba boton";
+		console.log(m.nombre);*/
+		m.$apply(function(){
+			m.nombre = "Prueba";
+		});
+	});
+
+}]);
