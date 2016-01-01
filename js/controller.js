@@ -357,3 +357,17 @@ servicesApp.controller("servicesController", ["$scope", "toDoService", function(
 	}
 
 }]);
+
+/* ng-src ngcloak in AngularJS */
+
+var srcCloakApp = angular.module("srcCloakApp", []);
+
+srcCloakApp.controller("srcCloakController", ["$scope", "$http", function(s, h){
+	h.get("https://api.github.com/users/oscarvillango/repos")
+		.success(function(data){
+			s.repos = data;
+		})
+		.error(function(err){
+			console.log(err);
+		});
+}]);

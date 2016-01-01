@@ -1,0 +1,18 @@
+<!doctype html>
+	<html ng-app="srcCloakApp">
+		<head>
+			<meta charset="utf-8" />
+			<title>Ejemplo con Angular - Ajax</title>
+			
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>		
+			<script type="text/javascript" src="js/controller.js"></script>	
+		</head>
+		<body ng-controller="srcCloakController">
+		<ul class="no-list" ng-cloak>
+			<li ng-repeat="repo in repos">
+				<h3>{{repo.name}}</h3>
+				<img ng-src="{{repo.owner.avatar_url}}">
+			</li>
+		</ul>
+		</body>
+	</html>
