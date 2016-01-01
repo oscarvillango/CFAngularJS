@@ -187,3 +187,23 @@ wapdiApp.controller("wapdiController", ["$scope", function(m){
 	});
 
 }]);
+
+/* ng Hide - Show in AngularJS */
+
+var ngHSApp = angular.module("ngHSApp", []);
+
+ngHSApp.controller("ngHSController", ["$scope", "$http", function(m, h){
+	m.posts = [];
+	m.loading = true;
+	h.get("http://jsonplaceholder.typicode.com/posts")
+		.success(function(data){
+			console.log(data);
+			m.posts = data;
+			m.loading = false;
+		})
+		.error(function(err){
+			console.log(err);
+			m.loading = false;
+		});
+
+}]);
