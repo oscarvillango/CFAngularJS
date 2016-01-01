@@ -294,3 +294,66 @@ factoriesApp.controller("factoriesController", ["$scope", "toDoService", functio
 	}
 
 }]);
+
+/* Services in AngularJS */
+
+var servicesApp = angular.module("servicesApp", ["LocalStorageModule"]);
+
+servicesApp.service("toDoService", ["localStorageService", function(l){
+	
+	this.key = "toDoList";
+
+	if(l.get(this.key)){
+		this.toDo = l.get(this.key);
+	}else{
+		this.toDo = [];
+	}
+
+	this.add = function(newActv){
+		this.toDo.push(newActv);
+		this.updateLocalStorage();
+	}
+
+	this.updateLocalStorage = function(){
+		l.set(this.key, this.toDo);
+	}
+
+	this.clear = function(){
+		this.toDo = [];
+		this.updateLocalStorage();
+		return this.getActivities();	
+	}
+
+	this.getActivities = function(){
+		return this.toDo;
+	}
+
+	this.removeItem = function(item){
+		this.toDo = this.toDo.filter(function(activity){
+			return activity != item;
+		});
+		this.updateLocalStorage();
+		return this.getActivities();	
+	}
+}]);
+
+servicesApp.controller("servicesController", ["$scope", "toDoService", function(m, t){
+
+
+	m.newActv = {};
+	m.toDo = t.getActivities();
+
+	m.addActividad = function(){
+		t.add(m.newActv);
+		m.newActv = {};
+	}
+
+	m.removeActv = function(item){
+		m.toDo = t.removeItem(item);
+	}
+
+	m.clearAct = function(){
+		m.toDo = t.clear();
+	}
+
+}]);
