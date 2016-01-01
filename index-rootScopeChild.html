@@ -1,0 +1,20 @@
+<!doctype html>
+	<html ng-app="rootScopeChildApp">
+		<head>
+			<meta charset="utf-8" />
+			<title>Ejemplo con Angular - Ajax</title>
+			
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+			<script type="text/javascript" src="js/controller.js"></script>
+			
+		</head>
+		<body ng-controller="rootScopeChildController">
+			<p><strong>Valor Scope: </strong>{{nombre}}</p>
+			<p><strong>Valor rootScope: </strong>{{$parent.nombre}}</p>
+			<div ng-controller="childController">
+				<p><strong>Valor del Scope Child: </strong>{{nombre}}</p>
+				<input type="text" ng-model="nombre" />
+				<input type="text" ng-model="$parent.nombre" />
+			</div>
+		</body>
+	</html>

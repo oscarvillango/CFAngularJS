@@ -207,3 +207,24 @@ ngHSApp.controller("ngHSController", ["$scope", "$http", function(m, h){
 		});
 
 }]);
+
+/* rootScope and Child in AngularJS */
+
+var rootScopeChildApp = angular.module("rootScopeChildApp", []);
+
+rootScopeChildApp.run(function($rootScope){
+	$rootScope.nombre = "Oscar Villafuerte";
+});
+
+rootScopeChildApp.controller("rootScopeChildController", ["$scope", function(m){
+	m.nombre = "Tracy Villafuerte";
+	setTimeout(function(){
+		m.$apply(function(){
+			m.nombre = "Fiorella Villafuerte";
+		});
+	}, 1000);
+}]);
+
+rootScopeChildApp.controller("childController",["$scope", function(s){
+
+}]);
