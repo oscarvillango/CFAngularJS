@@ -1,0 +1,26 @@
+<!doctype html>
+	<html ng-app="customDirectApp">
+		<head>
+			<meta charset="utf-8" />
+			<title>Ejemplo con Angular - Ajax</title>
+			
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>		
+			<script type="text/javascript" src="js/controller.js"></script>	
+			<style type="text/css">
+				.circular{
+					border-radius: 50%;
+					display: inline-block;
+					height: 100px;
+					width: 100px;
+				}
+			</style>
+		</head>
+		<body ng-controller="customDirectController">
+		<ul class="no-list" ng-cloak>
+			<li ng-repeat="repo in repos">
+				<h3>{{repo.name}}</h3>
+				<div class="circular" back-img="{{repo.owner.avatar_url}}"></div>
+			</li>
+		</ul>
+		</body>
+	</html>

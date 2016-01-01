@@ -371,3 +371,29 @@ srcCloakApp.controller("srcCloakController", ["$scope", "$http", function(s, h){
 			console.log(err);
 		});
 }]);
+
+/* Custom directives in AngularJS */
+
+var customDirectApp = angular.module("customDirectApp", []);
+
+customDirectApp.directive("backImg", function(){
+	return function(scope, element, attrs){
+		attrs.$observe("backImg", function(value){
+			element.css({
+				"background": "url("+ value +")",
+				"background-position": "center",
+				"background-size": "cover"
+			});
+		});
+	}
+});
+
+customDirectApp.controller("customDirectController", ["$scope", "$http", function(s, h){
+	h.get("https://api.github.com/users/codigofacilito/repos")
+		.success(function(data){
+			s.repos = data;
+		})
+		.error(function(err){
+			console.log(err);
+		});
+}]);
