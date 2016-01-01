@@ -228,3 +228,69 @@ rootScopeChildApp.controller("rootScopeChildController", ["$scope", function(m){
 rootScopeChildApp.controller("childController",["$scope", function(s){
 
 }]);
+
+/* Factories in AngularJS */
+
+var factoriesApp = angular.module("factoriesApp", ["LocalStorageModule"]);
+
+factoriesApp.factory("toDoService", ["localStorageService", function(l){
+	var toDoService = {};
+
+	toDoService.key = "toDoList";
+
+	if(l.get(toDoService.key)){
+		toDoService.toDo = l.get(toDoService.key);
+	}else{
+		toDoService.toDo = [];
+	}
+
+	toDoService.add = function(newActv){
+		toDoService.toDo.push(newActv);
+		toDoService.updateLocalStorage();
+	}
+
+	toDoService.updateLocalStorage = function(){
+		l.set(toDoService.key, toDoService.toDo);
+	}
+
+	toDoService.clear = function(){
+		toDoService.toDo = [];
+		toDoService.updateLocalStorage();
+		return toDoService.getActivities();	
+	}
+
+	toDoService.getActivities = function(){
+		return toDoService.toDo;
+	}
+
+	toDoService.removeItem = function(item){
+		toDoService.toDo = toDoService.toDo.filter(function(activity){
+			return activity != item;
+		});
+		toDoService.updateLocalStorage();
+		return toDoService.getActivities();	
+	}
+
+	return toDoService;
+}]);
+
+factoriesApp.controller("factoriesController", ["$scope", "toDoService", function(m, t){
+
+
+	m.newActv = {};
+	m.toDo = t.getActivities();
+
+	m.addActividad = function(){
+		t.add(m.newActv);
+		m.newActv = {};
+	}
+
+	m.removeActv = function(item){
+		m.toDo = t.removeItem(item);
+	}
+
+	m.clearAct = function(){
+		m.toDo = t.clear();
+	}
+
+}]);
