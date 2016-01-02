@@ -438,7 +438,7 @@ customDirect2App.directive("myAutocomplete", function(){
 customDirect2App.controller("customDirect2Controller", ["$scope", "$http", function(s, h){
 	s.repos = [];
 
-	h.get("https://api.github.com/users/twitter/repos")
+	h.get("https://api.github.com/users/codigofacilito/repos")
 		.success(function(data){
 			s.posts = data;
 			for(var i = data.length -1; i >= 0; i-- ){
