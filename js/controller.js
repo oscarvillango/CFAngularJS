@@ -397,3 +397,62 @@ customDirectApp.controller("customDirectController", ["$scope", "$http", functio
 			console.log(err);
 		});
 }]);
+
+/* Custom directives 2 in AngularJS */
+
+var customDirect2App = angular.module("customDirect2App", []);
+
+customDirect2App.directive("backImg", function(){
+	return function(scope, element, attrs){
+		attrs.$observe("backImg", function(value){
+			element.css({
+				"background": "url("+ value +")",
+				"background-position": "center",
+				"background-size": "cover"
+			});
+		});
+	}
+});
+
+customDirect2App.directive("myAutocomplete", function(){
+	function link(scope, element, attrs){
+		jQuery(element).autocomplete({
+			source: scope.$eval(attrs.myAutocomplete),
+			select: function(ev, ui){
+				ev.preventDefault();
+				if(ui.item){
+					scope.optionSelected(ui.item.value);
+				}
+			},
+			focus: function(ev, ui){
+				ev.preventDefault();
+				jQuery(this).val(ui.item.label);
+			}
+		});
+	};
+	return {
+		link: link
+	};
+});
+
+customDirect2App.controller("customDirect2Controller", ["$scope", "$http", function(s, h){
+	s.repos = [];
+
+	h.get("https://api.github.com/users/twitter/repos")
+		.success(function(data){
+			s.posts = data;
+			for(var i = data.length -1; i >= 0; i-- ){
+				var repo = data[i];
+				s.repos.push(repo.name);
+			}
+		})
+		.error(function(err){
+			console.log(err);
+		});
+
+	s.optionSelected = function(data){
+		s.$apply(function(){
+			s.main_repo = data;
+		});
+	}
+}]);
